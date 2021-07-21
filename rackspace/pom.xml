@@ -157,7 +157,7 @@
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>1.2.3</version>
+      <version>1.2.4</version>
     </dependency>
     <dependency>
       <groupId>mysql</groupId>
@@ -167,7 +167,7 @@
     <dependency>
       <groupId>com.google.auto.service</groupId>
       <artifactId>auto-service</artifactId>
-      <version>1.0-rc2</version>
+      <version>1.0</version>
     </dependency>
   </dependencies>
 
@@ -178,8 +178,8 @@
         <version>3.1</version>
         <configuration>
           <encoding>${project.build.sourceEncoding}</encoding>
-          <source>1.6</source>
-          <target>1.6</target>
+          <source>1.8</source>
+          <target>1.8</target>
         </configuration>
       </plugin>
     </plugins>

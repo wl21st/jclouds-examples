@@ -45,6 +45,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.collect.Iterables.getOnlyElement;
@@ -146,7 +148,7 @@ public class UploadDirectoryToCDN implements Closeable {
             ListenableFuture<BlobDetail> blobDetailFuture = executor.submit(blobUploader);
             blobUploaderFutures.add(blobDetailFuture);
 
-            Futures.addCallback(blobDetailFuture, blobUploaderCallback);
+            Futures.addCallback(blobDetailFuture, blobUploaderCallback, executor);
          }
 
          ListenableFuture<List<BlobDetail>> future = Futures.successfulAsList(blobUploaderFutures);
