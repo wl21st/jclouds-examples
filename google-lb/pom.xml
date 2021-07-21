@@ -27,7 +27,7 @@
   <description>jclouds-labs-google example that shows using the compute specific api and constructing a load balancer.</description>
 
   <properties>
-    <jclouds.version>2.1.0</jclouds.version>
+    <jclouds.version>2.3.0</jclouds.version>
   </properties>
 
   <dependencies>
@@ -53,9 +53,9 @@
       <version>${jclouds.version}</version>
     </dependency>
     <dependency>
-    	<groupId>ch.qos.logback</groupId>
-    	<artifactId>logback-classic</artifactId>
-    	<version>1.0.9</version>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.2.4</version>
     </dependency>
   </dependencies>
   <build>
@@ -65,7 +65,7 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.0</version>
         <configuration>
-          <encoding>${project.build.sourceEncoding}</encoding>
+          <encoding>utf-8</encoding>
           <source>1.8</source>
           <target>1.8</target>
         </configuration>

@@ -1,5 +1,6 @@
 # Dimension Data Examples
-Example code that uses jclouds to perform common tasks on an Dimension Data CloudControl. The class names are self-explanatory and the code is well commented for you to follow along.
+Example code that uses jclouds to perform common tasks on a Dimension Data CloudControl. The class names are
+self-explanatory, and the code is well commented for you to follow along.
 
 - [Requirements](#requirements)
 - [Environment](#environment)
@@ -14,7 +15,8 @@ Example code that uses jclouds to perform common tasks on an Dimension Data Clou
 1. Git - [Download](http://git-scm.com/downloads).
 
 ## Environment
-To setup an environment to compile and run the examples use these commands:
+
+To set up an environment to compile and run the examples use these commands:
 
 ```
 git clone https://github.com/jclouds/jclouds-examples.git
@@ -37,7 +39,7 @@ Every example class has a main method that takes the following arguments in the 
 1. Username
 1. Password
 
-If there are other arguments required they will follow. The command line format looks like this:
+If there are other arguments required, they will follow. The command line format looks like this:
 ```
 java -cp target\dimensiondata-cloudcontrol-examples-<VERSION>-jar-with-dependencies.jar <MAIN_CLASS> apiEndpoint username password <PARAMETERS>
 ```
