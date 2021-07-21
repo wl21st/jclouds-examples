@@ -19,29 +19,14 @@
 
 package org.jclouds.examples.compute.basics;
 
-import static com.google.common.base.Charsets.UTF_8;
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Predicates.not;
-import static com.google.common.collect.Iterables.concat;
-import static com.google.common.collect.Iterables.contains;
-import static com.google.common.collect.Iterables.getOnlyElement;
-import static org.jclouds.aws.ec2.reference.AWSEC2Constants.PROPERTY_EC2_AMI_QUERY;
-import static org.jclouds.aws.ec2.reference.AWSEC2Constants.PROPERTY_EC2_CC_AMI_QUERY;
-import static org.jclouds.compute.config.ComputeServiceProperties.TIMEOUT_SCRIPT_COMPLETE;
-import static org.jclouds.compute.options.TemplateOptions.Builder.overrideLoginCredentials;
-import static org.jclouds.compute.options.TemplateOptions.Builder.runScript;
-import static org.jclouds.compute.predicates.NodePredicates.TERMINATED;
-import static org.jclouds.compute.predicates.NodePredicates.inGroup;
-import static org.jclouds.scriptbuilder.domain.Statements.exec;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Properties;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-
+import com.google.common.base.Charsets;
+import com.google.common.base.Predicates;
+import com.google.common.base.Supplier;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
+import com.google.common.io.Files;
+import com.google.inject.Module;
 import org.jclouds.ContextBuilder;
 import org.jclouds.apis.ApiMetadata;
 import org.jclouds.apis.Apis;
@@ -66,14 +51,26 @@ import org.jclouds.scriptbuilder.domain.Statement;
 import org.jclouds.scriptbuilder.statements.login.AdminAccess;
 import org.jclouds.sshj.config.SshjSshClientModule;
 
-import com.google.common.base.Charsets;
-import com.google.common.base.Predicates;
-import com.google.common.base.Supplier;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Maps;
-import com.google.common.io.Files;
-import com.google.inject.Module;
+import java.io.File;
+import java.io.IOException;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Properties;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
+import static com.google.common.base.Charsets.UTF_8;
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Predicates.not;
+import static com.google.common.collect.Iterables.*;
+import static org.jclouds.aws.ec2.reference.AWSEC2Constants.PROPERTY_EC2_AMI_QUERY;
+import static org.jclouds.aws.ec2.reference.AWSEC2Constants.PROPERTY_EC2_CC_AMI_QUERY;
+import static org.jclouds.compute.config.ComputeServiceProperties.TIMEOUT_SCRIPT_COMPLETE;
+import static org.jclouds.compute.options.TemplateOptions.Builder.overrideLoginCredentials;
+import static org.jclouds.compute.options.TemplateOptions.Builder.runScript;
+import static org.jclouds.compute.predicates.NodePredicates.TERMINATED;
+import static org.jclouds.compute.predicates.NodePredicates.inGroup;
+import static org.jclouds.scriptbuilder.domain.Statements.exec;
 
 /**
  * Demonstrates the use of {@link ComputeService}.
@@ -104,31 +101,38 @@ public class MainApp {
    public static final String PROPERTY_OAUTH_ENDPOINT = "oauth.endpoint";
 
    public static void main(String[] args) {
-      if (args.length < PARAMETERS)
+      if (args.length < PARAMETERS) {
          throw new IllegalArgumentException(INVALID_SYNTAX);
+      }
 
       String provider = args[0];
       String identity = args[1];
       String credential = args[2];
       String groupName = args[3];
       Action action = Action.valueOf(args[4].toUpperCase());
-      boolean providerIsGCE = provider.equalsIgnoreCase("google-compute-engine");
-
-      if (action == Action.EXEC && args.length < PARAMETERS + 1)
+      if (action == Action.EXEC && args.length < PARAMETERS + 1) {
          throw new IllegalArgumentException("please quote the command to exec as the last parameter");
+      }
+
       String command = (action == Action.EXEC) ? args[5] : "echo hello";
 
       // For GCE, the credential parameter is the path to the private key file
-      if (providerIsGCE)
+      boolean providerIsGCE = provider.equalsIgnoreCase("google-compute-engine");
+      if (providerIsGCE) {
          credential = getCredentialFromJsonKeyFile(credential);
+      }
 
-      if (action == Action.RUN && args.length < PARAMETERS + 1)
+      if (action == Action.RUN && args.length < PARAMETERS + 1) {
          throw new IllegalArgumentException("please pass the local file to run as the last parameter");
+      }
+
       File file = null;
       if (action == Action.RUN) {
          file = new File(args[5]);
-         if (!file.exists())
+
+         if (!file.exists()) {
             throw new IllegalArgumentException("file must exist! " + file);
+         }
       }
 
       String minRam = System.getProperty("minRam");
@@ -151,9 +155,9 @@ public class MainApp {
 
             // If you want to up the ram and leave everything default, you can
             // just tweak minRam
-            if (minRam != null)
+            if (minRam != null) {
                templateBuilder.minRam(Integer.parseInt(minRam));
-
+            }
 
             // note this will create a user with the same name as you on the
             // node. ex. you can connect via ssh publicip
