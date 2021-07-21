@@ -16,19 +16,9 @@
  */
 package org.jclouds.examples.blobstore.largeblob;
 
-import static com.google.common.collect.Iterables.transform;
-import static org.jclouds.Constants.PROPERTY_ENDPOINT;
-import static org.jclouds.blobstore.options.PutOptions.Builder.multipart;
-import static org.jclouds.location.reference.LocationConstants.ENDPOINT;
-import static org.jclouds.location.reference.LocationConstants.PROPERTY_REGION;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.NoSuchElementException;
-import java.util.Properties;
-
-import javax.ws.rs.core.MediaType;
-
+import com.google.common.collect.ImmutableSet;
+import com.google.common.io.Files;
+import com.google.inject.Module;
 import org.jclouds.ContextBuilder;
 import org.jclouds.aws.domain.Region;
 import org.jclouds.blobstore.BlobStore;
@@ -41,9 +31,17 @@ import org.jclouds.netty.config.NettyPayloadModule;
 import org.jclouds.providers.ProviderMetadata;
 import org.jclouds.providers.Providers;
 
-import com.google.common.collect.ImmutableSet;
-import com.google.common.io.Files;
-import com.google.inject.Module;
+import javax.ws.rs.core.MediaType;
+import java.io.File;
+import java.io.IOException;
+import java.util.NoSuchElementException;
+import java.util.Properties;
+
+import static com.google.common.collect.Iterables.transform;
+import static org.jclouds.Constants.PROPERTY_ENDPOINT;
+import static org.jclouds.blobstore.options.PutOptions.Builder.multipart;
+import static org.jclouds.location.reference.LocationConstants.ENDPOINT;
+import static org.jclouds.location.reference.LocationConstants.PROPERTY_REGION;
 
 /**
  * Demonstrates the use of {@link BlobStore}.

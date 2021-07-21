@@ -16,15 +16,13 @@
  */
 package org.jclouds.examples.blobstore.basics;
 
-import static com.google.common.base.Charsets.UTF_8;
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.collect.Iterables.contains;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Map;
-import java.util.Set;
-
+import com.google.common.base.Charsets;
+import com.google.common.base.Supplier;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
+import com.google.common.io.ByteSource;
+import com.google.common.io.Files;
 import org.jclouds.ContextBuilder;
 import org.jclouds.apis.ApiMetadata;
 import org.jclouds.apis.Apis;
@@ -38,6 +36,7 @@ import org.jclouds.blobstore.domain.Blob;
 import org.jclouds.blobstore.domain.StorageMetadata;
 import org.jclouds.domain.Credentials;
 import org.jclouds.domain.Location;
+import org.jclouds.googlecloud.GoogleCredentialsFromJson;
 import org.jclouds.googlecloudstorage.GoogleCloudStorageApi;
 import org.jclouds.googlecloudstorage.GoogleCloudStorageApiMetadata;
 import org.jclouds.openstack.swift.v1.SwiftApi;
@@ -47,15 +46,14 @@ import org.jclouds.providers.Providers;
 import org.jclouds.s3.S3ApiMetadata;
 import org.jclouds.s3.S3Client;
 
-import com.google.common.base.Charsets;
-import com.google.common.base.Supplier;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Maps;
-import com.google.common.io.ByteSource;
-import com.google.common.io.Files;
+import java.io.File;
+import java.io.IOException;
+import java.util.Map;
+import java.util.Set;
 
-import org.jclouds.googlecloud.GoogleCredentialsFromJson;
+import static com.google.common.base.Charsets.UTF_8;
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.collect.Iterables.contains;
 
 /**
  * Demonstrates the use of {@link BlobStore}.

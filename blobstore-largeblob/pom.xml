@@ -27,7 +27,7 @@
   <description>jclouds blobstore example that creates a container, then uploads a large file using parallel multipart upload</description>
 
   <properties>
-    <jclouds.version>2.1.0</jclouds.version>
+    <jclouds.version>2.3.0</jclouds.version>
   </properties>
 
   <dependencies>
@@ -81,8 +81,8 @@
         <version>3.1</version>
         <configuration>
           <encoding>${project.build.sourceEncoding}</encoding>
-          <source>1.6</source>
-          <target>1.6</target>
+          <source>1.8</source>
+          <target>1.8</target>
         </configuration>
       </plugin>
       <plugin>

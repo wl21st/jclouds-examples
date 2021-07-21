@@ -83,7 +83,7 @@ public class GenerateTempURL implements Closeable {
          generateTempURL.createContainer();
          generateTempURL.generatePutTempURL();
          generateTempURL.generateGetTempURL();
-         generateTempURL.generateDeleteTempURL();
+//         generateTempURL.generateDeleteTempURL();
       }
       catch (Exception e) {
          e.printStackTrace();
@@ -169,24 +169,24 @@ public class GenerateTempURL implements Closeable {
       }
    }
 
-   private void generateDeleteTempURL() throws IOException {
-      System.out.format("Generate DELETE Temp URL%n");
-
-      HttpRequest request = blobStoreContext.getSigner(REGION).signRemoveBlob(CONTAINER, FILENAME);
-
-      System.out.format("  %s %s%n", request.getMethod(), request.getEndpoint());
-
-      // DELETE the file using jclouds
-      HttpResponse response = blobStoreContext.utils().http().invoke(request);
-      int statusCode = response.getStatusCode();
-
-      if (statusCode >= 200 && statusCode < 299) {
-         System.out.format("  DELETE Success (%s)%n", statusCode);
-      }
-      else {
-         throw new HttpResponseException(null, response);
-      }
-   }
+//   private void generateDeleteTempURL() throws IOException {
+//      System.out.format("Generate DELETE Temp URL%n");
+//
+//      HttpRequest request = blobStoreContext.getSigner(REGION).signRemoveBlob(CONTAINER, FILENAME);
+//
+//      System.out.format("  %s %s%n", request.getMethod(), request.getEndpoint());
+//
+//      // DELETE the file using jclouds
+//      HttpResponse response = blobStoreContext.utils().http().invoke(request);
+//      int statusCode = response.getStatusCode();
+//
+//      if (statusCode >= 200 && statusCode < 299) {
+//         System.out.format("  DELETE Success (%s)%n", statusCode);
+//      }
+//      else {
+//         throw new HttpResponseException(null, response);
+//      }
+//   }
 
    /**
     * Always close your service when you're done with it.

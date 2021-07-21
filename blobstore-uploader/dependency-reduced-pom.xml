@@ -38,6 +38,6 @@
     </plugins>
   </build>
   <properties>
-    <jclouds.version>2.1.0</jclouds.version>
+    <jclouds.version>2.3.0</jclouds.version>
   </properties>
 </project>
