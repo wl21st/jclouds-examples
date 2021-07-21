@@ -80,8 +80,9 @@ public class MainApp {
       String credential;
       String containerName;
 
-      if (args.length < PARAMETERS)
+      if (args.length < PARAMETERS) {
          throw new IllegalArgumentException(INVALID_SYNTAX);
+      }
 
       // Args
       provider = args[0];
@@ -93,8 +94,9 @@ public class MainApp {
       boolean providerIsGCS = provider.equalsIgnoreCase("google-cloud-storage");
 
       // For GCE, the credential parameter is the path to the private key file
-      if (providerIsGCS)
+      if (providerIsGCS) {
          credential = getCredentialFromJsonKeyFile(credential);
+      }
 
       // Init
       BlobStoreContext context = ContextBuilder.newBuilder(provider)
@@ -146,14 +148,15 @@ public class MainApp {
             GoogleCloudStorageApi api = context.unwrapApi(GoogleCloudStorageApi.class);
             object = api.getObjectApi().getObject(containerName, blobName);
          }
+         
          if (object != null) {
             System.out.println(object);
          }
 
       } finally {
-         // delete cointainer
+         // delete container
          blobStore.deleteContainer(containerName);
-         // Close connecton
+         // Close connection
          context.close();
       }
 
