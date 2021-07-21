@@ -57,19 +57,19 @@ import static com.google.common.collect.Iterables.contains;
 
 /**
  * Demonstrates the use of {@link BlobStore}.
- * 
+ * <p>
  * Usage is: java MainApp \"provider\" \"identity\" \"credential\" \"containerName\"
  */
 public class MainApp {
-   
+
    public static final Map<String, ApiMetadata> allApis = Maps.uniqueIndex(Apis.viewableAs(BlobStoreContext.class),
-        Apis.idFunction());
-   
+           Apis.idFunction());
+
    public static final Map<String, ProviderMetadata> appProviders = Maps.uniqueIndex(Providers.viewableAs(BlobStoreContext.class),
-        Providers.idFunction());
-   
+           Providers.idFunction());
+
    public static final Set<String> allKeys = ImmutableSet.copyOf(Iterables.concat(appProviders.keySet(), allApis.keySet()));
-   
+
    public static int PARAMETERS = 4;
    public static String INVALID_SYNTAX = "Invalid number of parameters. Syntax is: \"provider\" \"identity\" \"credential\" \"containerName\".";
 
@@ -79,7 +79,7 @@ public class MainApp {
       String identity;
       String credential;
       String containerName;
-      
+
       if (args.length < PARAMETERS)
          throw new IllegalArgumentException(INVALID_SYNTAX);
 
@@ -94,7 +94,7 @@ public class MainApp {
 
       // For GCE, the credential parameter is the path to the private key file
       if (providerIsGCS)
-	  credential = getCredentialFromJsonKeyFile(credential);
+         credential = getCredentialFromJsonKeyFile(credential);
 
       // Init
       BlobStoreContext context = ContextBuilder.newBuilder(provider)
@@ -115,17 +115,17 @@ public class MainApp {
          ByteSource payload = ByteSource.wrap("testdata".getBytes(Charsets.UTF_8));
 
          // List Container Metadata
-	 for (StorageMetadata resourceMd : blobStore.list()) {
-	     if (containerName.equals(resourceMd.getName())) {
-		 System.out.println(resourceMd);
-	     }
-	 }
+         for (StorageMetadata resourceMd : blobStore.list()) {
+            if (containerName.equals(resourceMd.getName())) {
+               System.out.println(resourceMd);
+            }
+         }
 
          // Add Blob
          Blob blob = blobStore.blobBuilder(blobName)
-            .payload(payload)
-            .contentLength(payload.size())
-            .build();
+                 .payload(payload)
+                 .contentLength(payload.size())
+                 .build();
          blobStore.putBlob(containerName, blob);
 
          // Use Provider API
@@ -149,10 +149,10 @@ public class MainApp {
          if (object != null) {
             System.out.println(object);
          }
-         
+
       } finally {
          // delete cointainer
-	  blobStore.deleteContainer(containerName);
+         blobStore.deleteContainer(containerName);
          // Close connecton
          context.close();
       }
@@ -160,18 +160,21 @@ public class MainApp {
    }
 
     private static String getCredentialFromJsonKeyFile(String filename) {
-	try {
-	    String fileContents = Files.toString(new File(filename), UTF_8);
-	    Supplier<Credentials> credentialSupplier = new GoogleCredentialsFromJson(fileContents);
-	    String credential = credentialSupplier.get().credential;
-	    return credential;
-	} catch (IOException e) {
-	    System.err.println("Exception reading private key from '%s': " + filename);
-	    e.printStackTrace();
-	    System.exit(1);
-	    return null;
-	}
+       try {
+          String fileContents = Files.asCharSource(new File(filename), UTF_8).read();
+
+          Supplier<Credentials> credentialSupplier = new GoogleCredentialsFromJson(fileContents);
+
+          String credential = credentialSupplier.get().credential;
+
+          return credential;
+       } catch (IOException e) {
+          System.err.println("Exception reading private key from '%s': " + filename);
+          e.printStackTrace();
+          System.exit(1);
+          return null;
+       }
     }
 
-    
+
 }
