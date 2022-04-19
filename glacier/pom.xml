@@ -26,14 +26,15 @@
     <name>glacier-examples</name>
 
     <properties>
-        <jclouds.version>2.3.0</jclouds.version>
+        <jclouds.version>2.5.0</jclouds.version>
+        <jclouds.glacier.version>2.4.0</jclouds.glacier.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.apache.jclouds.labs</groupId>
             <artifactId>glacier</artifactId>
-            <version>${jclouds.version}</version>
+            <version>${jclouds.glacier.version}</version>
         </dependency>
     </dependencies>
 

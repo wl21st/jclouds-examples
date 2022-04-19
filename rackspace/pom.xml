@@ -26,7 +26,9 @@
     <name>rackspace-examples</name>
 
     <properties>
-        <jclouds.version>2.3.0</jclouds.version>
+        <jclouds.version>2.5.0</jclouds.version>
+        <jclouds.rackspace.previous.version>2.4.0</jclouds.rackspace.previous.version>
+        <project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
     </properties>
 
     <repositories>
@@ -80,7 +82,7 @@
         <dependency>
             <groupId>org.apache.jclouds.labs</groupId>
             <artifactId>rackspace-cloudqueues-us</artifactId>
-            <version>${jclouds.version}</version>
+            <version>${jclouds.rackspace.previous.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.jclouds.provider</groupId>
@@ -95,7 +97,7 @@
         <dependency>
             <groupId>org.apache.jclouds.labs</groupId>
             <artifactId>rackspace-cdn-us</artifactId>
-            <version>${jclouds.version}</version>
+            <version>${jclouds.rackspace.previous.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.jclouds.provider</groupId>
@@ -126,12 +128,12 @@
         <dependency>
             <groupId>org.apache.jclouds.labs</groupId>
             <artifactId>rackspace-cloudqueues-uk</artifactId>
-            <version>${jclouds.version}</version>
+            <version>${jclouds.rackspace.previous.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.jclouds.labs</groupId>
             <artifactId>rackspace-autoscale-us</artifactId>
-            <version>${jclouds.version}</version>
+            <version>${jclouds.rackspace.previous.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.jclouds.provider</groupId>
@@ -146,7 +148,7 @@
         <dependency>
             <groupId>org.apache.jclouds.labs</groupId>
             <artifactId>rackspace-cdn-uk</artifactId>
-            <version>${jclouds.version}</version>
+            <version>${jclouds.rackspace.previous.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.jclouds.provider</groupId>
@@ -157,17 +159,17 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.2.4</version>
+            <version>1.2.11</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.46</version>
+            <version>8.0.28</version>
         </dependency>
         <dependency>
             <groupId>com.google.auto.service</groupId>
             <artifactId>auto-service</artifactId>
-            <version>1.0</version>
+            <version>1.0.1</version>
         </dependency>
     </dependencies>
 

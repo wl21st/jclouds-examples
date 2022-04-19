@@ -27,7 +27,7 @@
    <version>2.3.0</version>
 
    <properties>
-       <jclouds.version>2.3.0</jclouds.version>
+       <jclouds.version>2.5.0</jclouds.version>
    </properties>
 
    <dependencies>
@@ -39,7 +39,7 @@
        <dependency>
            <groupId>ch.qos.logback</groupId>
            <artifactId>logback-classic</artifactId>
-           <version>1.2.4</version>
+           <version>1.2.11</version>
        </dependency>
        <dependency>
            <groupId>org.apache.jclouds</groupId>
